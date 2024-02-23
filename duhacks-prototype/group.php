@@ -84,7 +84,7 @@
             }
         }
 
-        echo("reached till here");
+        echo("concept: comma seperated values for multiple insert <br> further develop this for better ui");
     }
 
 ?>
