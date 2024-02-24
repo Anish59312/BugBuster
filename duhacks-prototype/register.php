@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     $password = $_POST['password'];
     $email = $_POST['email'];
 
-    $check_usr_exsist = "SELECT `user_id` FROM `user` WHERE `username` = '$username'";
+    $check_usr_exsist = "SELECT `user_id` FROM `user` WHERE `user_name` = '$username'";
     $result = mysqli_query($link, $check_usr_exsist);
     if(mysqli_num_rows($result) > 0){
         header("Location: register.php?message=".urlencode("username already exsist"));

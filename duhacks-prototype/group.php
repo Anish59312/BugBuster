@@ -1,5 +1,84 @@
 
 
+<?php
+
+    require_once "config.php";
+
+    if(isset($_POST["groupCreateSubmit"])){
+        $groupName = $_POST["groupName"];
+        $groupDescription = $_POST["groupDescription"];
+        $users = $_POST["userName"];
+        $usersID = [];
+
+        $users = explode(",",$users);
+        //array of usernames of friends in group
+        //add creators username to this
+
+        $insetGroupsQuery = "INSERT INTO `groups`(`group_name`, `group_description`) VALUES(?,?)";
+        
+        $stmt = mysqli_prepare($link, $insetGroupsQuery);
+
+        mysqli_stmt_bind_param($stmt, "ss", $groupName, $groupDescription);
+
+        mysqli_stmt_execute($stmt);
+
+        $findGroupIDQuery = "SELECT `group_id` FROM `groups` WHERE `group_name`=?";
+
+        $stmt = mysqli_prepare($link, $findGroupIDQuery);
+
+        mysqli_stmt_bind_param($stmt, "s", $groupName);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $groupID = $result->fetch_assoc()['group_id'];
+
+        $insertInUserGroupsQuery = "INSERT INTO `group_user`(`group_id`, `user_id`) VALUES(?,?)";
+        $stmt = mysqli_prepare($link, $insertInUserGroupsQuery);
+
+        $findUserIdQuery = "SELECT `user_id` FROM `user` WHERE `user_name` = ?";
+        $stmt2 = mysqli_prepare($link, $findUserIdQuery);
+
+        $usersID = [];
+
+        foreach($users as $usr){
+          mysqli_stmt_bind_param($stmt2, "s", $usr);
+          $stmt2->execute();
+          $resultUserID =  $stmt2->get_result();
+          if ($resultUserID->num_rows == 0) {
+            // var_dump($usersID);
+            // echo("<br>");
+            // var_dump($groupID);
+            // echo("<br>");
+            // var_dump($users);
+            // echo("<br>");
+            break;
+          }
+          $ID = $resultUserID->fetch_assoc()['user_id'];
+          array_push($usersID, $ID);
+        }
+
+        foreach($usersID as $usrid){
+          mysqli_stmt_bind_param($stmt, "ii", $groupID, $usrid);
+          $stmt->execute();
+        }
+
+        // var_dump($usersID);
+
+        // mysqli_stmt_bind_param($stmt, "ii", $groupID, $userID);
+        //   mysqli_stmt_execute($stmt);
+        //   var_dump($userID);
+        //   echo('<br>');
+
+        // foreach($usersID as $usr){
+        //   mysqli_stmt_bind_param($stmt, "ii", $groupID, $usr);
+        // }
+
+        echo("concept: comma seperated values for multiple insert <br> further develop this for better ui");
+    }
+
+?>
+
 
 <!doctype html>
 <html lang="en">
@@ -37,54 +116,19 @@
 
 <form method="post" action="" >
   <div class="form-group">
-    <label for="exampleInputEmail1">Group id</label>
-    <input type="text" class="form-control" id="" name="group_id" placeholder="Enter group id">
+    <label for="exampleInputEmail1">Group Name</label>
+    <input type="text" class="form-control" name="groupName" placeholder="group name">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">User id</label>
-    <input type="textarea" class="form-control" id="" name="user_id" placeholder="Enter group id">
+    <label for="exampleInputEmail1">Group Description</label>
+    <input type="textarea" class="form-control" name="groupDescription" placeholder="description">
   </div>
-  <button type="submit" class="btn btn-primary" name="cgsub">Submit</button>
+  <div class="form-group">
+    <label for="userName">Friends</label>
+    <input type="textarea" class="form-control" name="userName" placeholder="Enter friends' username">
+  </div>
+  <button type="submit" class="btn btn-primary" name="groupCreateSubmit">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
-
-<?php
-
-    require_once "config.php";
-
-    if(isset($_POST["cgsub"])){
-        $group_id = intval($_POST["group_id"]);
-        $user_id = $_POST["user_id"];
-
-        var_dump($user_id);
-        echo("<br>");
-
-        $users = explode(",",$user_id);
-        //array of users
-
-        $users = array_map('intval', $users);
-        //users as int
-
-        var_dump($users);
-        echo("<br>");
-
-        $query = "INSERT INTO `friendcircle`(`group_id`, `user_id`) VALUES(?, ?)";
-        
-        $stmt = mysqli_prepare($link, $query);
-
-        foreach($users as $usr){
-            mysqli_stmt_bind_param($stmt, "ii", $group_id, $usr);
-            if(mysqli_stmt_execute($stmt)){
-                echo($group_id . " - ". $usr."<br>");
-            }
-            else{
-                echo("error");
-            }
-        }
-
-        echo("concept: comma seperated values for multiple insert <br> further develop this for better ui");
-    }
-
-?>
