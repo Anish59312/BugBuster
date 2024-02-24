@@ -27,7 +27,7 @@
             <a class="nav-link" href="group.php">Group</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="">Create</a>
+            <a class="nav-link" href="create-transaction.php">Create</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="#">Transactions</a>
