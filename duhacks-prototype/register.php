@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     }
     else{
         $registerTimestamp = date("Y-m-d H:i:s");
-        $insert_query = "INSERT INTO `user`(`username`, `password`, `email`, `register_timestamp`) VALUES(?, ?, ?, ?)";
+        $insert_query = "INSERT INTO `user`(`user_name`, `user_password`, `user_email`, `register_time`) VALUES(?, ?, ?, ?)";
         $stmt = $link->prepare($insert_query);
         $stmt->bind_param("ssss",$username,$password,$email,$registerTimestamp);
         if($stmt->execute()){
