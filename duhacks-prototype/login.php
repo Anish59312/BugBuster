@@ -1,17 +1,16 @@
 <?php
 include('config.php');
 session_start();
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    echo('inside post processing');
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password']) && !empty(trim($_POST['password'])) && !empty(trim($_POST['username']))) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $check_usr_exsist = "SELECT * FROM `user` WHERE `user_name` = '$username'";
+    $check_usr_exsist = "SELECT * FROM user WHERE user_name = '$username'";
     $result = mysqli_query($link, $check_usr_exsist);
+    $_SESSION = false;
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        var_dump($row);  
         if ($password == $row['user_password'] ) {
-            $_SESSION['loggedin'] = true;
+            $_SESSION["loggedin"] = true;
             $_SESSION["username"] = $row['user_name'];
             $_SESSION["user_id"] = $row['user_id'];
             header('Location: home1.php');
@@ -23,9 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     } else {
         echo "code for error(user does not exist please register)";
     }
-    
-}
 
+}
 ?>
 
 
