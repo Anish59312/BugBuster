@@ -12,7 +12,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid ">
-        <a class="navbar-brand" href="#">SPLITWISE</a>
+        <a class="navbar-brand" href="home.php">SPLITWISE</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,7 +42,7 @@
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">User id</label>
-    <input type="text" class="form-control" id="" name="user_id" placeholder="Enter group id">
+    <input type="textarea" class="form-control" id="" name="user_id" placeholder="Enter group id">
   </div>
   <button type="submit" class="btn btn-primary" name="cgsub">Submit</button>
 </form>
@@ -56,7 +56,7 @@
 
     if(isset($_POST["cgsub"])){
         $group_id = intval($_POST["group_id"]);
-        $user_id = intval($_POST["user_id"]);
+        $user_id = $_POST["user_id"];
 
         var_dump($user_id);
         echo("<br>");
