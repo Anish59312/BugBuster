@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 <head>
     <meta charset="UTF-8">
     <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" href="register.css">
 </head>
 <body>
     <h2>User Registration</h2>
@@ -47,6 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
         <input type="password" name="password" required>
         <br>
         <input type="submit" name="register" value="Register">
+        <br>
+        <br>
+        <span>already registered? <a href="login.php">login</a></span>
     </form>
+
+    <p><?php 
+    if(isset( $_GET['message'])){
+        echo ($_GET['message']);
+    }
+    ?>
+    </p>
 </body>
 </html>
