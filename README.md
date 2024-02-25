@@ -16,9 +16,11 @@ To run this project locally,
 ### Prerequisites
 
 Make sure you have [XAMPP](https://www.apachefriends.org/index.html) installed on your system.
+Run given SpliteEase.sql in your PHPMyadmin to import database
 
 ### Installation
-
+**To Run SQL file:**
+1.
 1. Navigate to the root directory of your system.
 
 2. Locate the *xampp* folder.
@@ -34,6 +36,11 @@ Make sure you have [XAMPP](https://www.apachefriends.org/index.html) installed o
 ```bash
 http://localhost/BugBuster/duhacks-prototype/home1.php
 ```
+
+**To Run SQL file:**
+1. Go to [localhost/phpmyadmin/](localhost/phpmyadmin/)
+2. Click on Import in toolbar chose the SplitEase.sql file and click on import
+3. If you get successfull message then you are goog to go 
 
 ## Support and Contact
 
