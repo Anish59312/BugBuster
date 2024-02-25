@@ -40,7 +40,7 @@ http://localhost/BugBuster/duhacks-prototype/home1.php
 **To Run SQL file:**
 1. Go to [localhost/phpmyadmin/](localhost/phpmyadmin/)
 2. Click on Import in toolbar chose the SplitEase.sql file and click on import
-3. If you get successfull message then you are goog to go 
+3. If you get successful message then you are good to go 
 
 ## Support and Contact
 
