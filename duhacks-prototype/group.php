@@ -59,8 +59,14 @@ if ($_SESSION["loggedin"] == "true") {
     }
     foreach ($usersID as $usrid) {
       mysqli_stmt_bind_param($stmt, "ii", $groupID, $usrid);
-      $stmt->execute();
-    }
+      if(!$stmt->execute()){
+        die("duplicate entry error");
+      }
+    
+      header("Location: group.php");
+
+    echo("<script>showSuccessNotification();</script>");
+  }
 
   }
 } else {
@@ -80,9 +86,56 @@ if ($_SESSION["loggedin"] == "true") {
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
+<style>
+        /* Optional: Add some basic styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        #userName {
+            display: none;
+        }
+
+        /* Style the "Add" button */
+        .btn-add {
+            background-color: blue ; 
+            color: #fff; /* White text */
+            border: none;
+            padding: auto;
+            cursor: pointer;
+            margin-top: 10px;
+
+        }
+
+        /* Hide the textarea input */
+        #userName {
+            display: none;
+        }
+
+        .success-notification {
+          display: none;
+          background-color: #28a745; /* Bootstrap success color */
+          color: #fff;
+          padding: 10px;
+          border-radius: 5px;
+          position: fixed;
+          top: 0px;
+          left: 5px;
+          margin-top: 10px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;;
+          z-index: 1000;
+        }
+    </style>
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid ">
+    <div class="container-fluid">
       <a class="navbar-brand" href="home.php">SPLITWISE</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +159,20 @@ if ($_SESSION["loggedin"] == "true") {
       </div>
     </div>
   </nav>
-  <div id="addGroupContainer">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width:100%;">
+  Click Here to Create a Group
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Group</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div id="addGroupContainer">
     <form method="post" action="">
       <div class="form-group">
         <label for="exampleInputEmail1">Group Name</label>
@@ -117,19 +183,41 @@ if ($_SESSION["loggedin"] == "true") {
         <input type="textarea" class="form-control" name="groupDescription" placeholder="description">
       </div>
       <div class="form-group">
-        <label for="userName">Friends</label>
-        <input type="textarea" class="form-control" name="userName" placeholder="Enter friends' username">
+        <label for="newFriend">Enter Friend's Name:</label>
+        <input type="text" class="form-control" id="newFriend" placeholder="Enter friend's username">
+        <button class="btn-add btn" type="button" onclick="addFriend()">Add</button>
+      </div>
+      <div class="form-group">
+        <ul id="list-in-modal">
+        </ul>
+      </div>
+      <div class="form-group">
+        <input type="textarea" class="form-control" id="userName" name="userName" placeholder="Enter friends' username">
       </div>
       <button type="submit" class="btn btn-primary" name="groupCreateSubmit">Submit</button>
     </form>
   </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <div class="view-group-container">
     <?php include("view-group.php");?>
   </div>
+
+
+  <div class="success-notification" id="successNotification">
+    Friend added successfully!
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

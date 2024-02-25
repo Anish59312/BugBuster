@@ -24,16 +24,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="home1.php">Home</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="group.php">Group</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="create-transaction.php">Create</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Transactions</a>
             </li>
         </ul>
         <ul class="navbar-nav ms-auto">
