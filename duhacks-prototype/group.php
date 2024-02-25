@@ -1,5 +1,7 @@
+<!-- it will add group members to group-user table and create  row in group table -->
+<!-- in case loggedin user doesn't type his/her username they will auomatically be part of the group -->
+<!-- multiple values are added using comma seperation. use concept of , speration with javascript to replace , sepration with add buttom. javascript will do comma sepration behind html -->
 <?php
-
 require_once "config.php";
 session_start();
 if ($_SESSION["loggedin"] == "true") {
@@ -10,15 +12,16 @@ if ($_SESSION["loggedin"] == "true") {
     $usersID = [];
 
     $users = explode(",", $users);
-    //array of usernames of friends in group
-    //add creators username to this
+    if(!in_array($_SESSION["username"],$users)){
+      $users[]  = $_SESSION["username"];
+    }
+      $numberOfMembers = count($users);
 
 
-
-    $insetGroupsQuery = "INSERT INTO `groups`(`group_name`, `group_description`) VALUES(?,?)";
+    $insetGroupsQuery = "INSERT INTO `groups`(`group_name`, `group_description`, `number_of_members`) VALUES(?,?,?)";
 
     $stmt = mysqli_prepare($link, $insetGroupsQuery);
-    mysqli_stmt_bind_param($stmt, "ss", $groupName, $groupDescription);
+    mysqli_stmt_bind_param($stmt, "ssi", $groupName, $groupDescription, $numberOfMembers);
     $result = mysqli_stmt_execute($stmt);
 
     //check if group name is already taken
@@ -40,13 +43,12 @@ if ($_SESSION["loggedin"] == "true") {
 
     $findUserIdQuery = "SELECT `user_id` FROM `user` WHERE `user_name` = ?";
     $stmt2 = mysqli_prepare($link, $findUserIdQuery);
-    mysqli_stmt_bind_param($stmt, "ii", $groupID, $_SESSION['user_id']);
-    $stmt->execute();
+;
     $usersID = [];
 
     foreach ($users as $usr) {
       mysqli_stmt_bind_param($stmt2, "s", $usr);
-      $stmt2->execute();
+      $stmt2->execute();  
       $resultUserID = $stmt2->get_result();
       if ($resultUserID->num_rows == 0) {
         die("user not found");
@@ -55,13 +57,11 @@ if ($_SESSION["loggedin"] == "true") {
       $ID = $resultUserID->fetch_assoc()['user_id'];
       array_push($usersID, $ID);
     }
-
     foreach ($usersID as $usrid) {
       mysqli_stmt_bind_param($stmt, "ii", $groupID, $usrid);
       $stmt->execute();
     }
 
-    echo ("concept: comma seperated values for multiple insert <br> further develop this for better ui");
   }
 } else {
   header("Location: login.php");
