@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.banner-area{
+    background: rgba(255, 255, 255, 0.4) url(wallpaper3.jpg);
+    background-position: center center;
+    background-size:cover ;
+    /* -webkit-background-size:cover ; */
+    height: 95vh;
+    width: auto;
+    margin: auto;
+}
+
+
+.banner-text{
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    margin: 20% 30%;
+    text-align: center;
+}
+.banner-text h1{
+    text-align: center;
+    color:rgb(255, 255, 255);
+    
+    text-transform: uppercase;
+    font-size: 60px;
+    font-family: 'poppins' , sans-serif;
+}
+.banner-text p{
+    color: #fff;
+    font-size: 18px;
+}
+.banner-text a{
+    border: 1px solid #fff;
+    padding: 10px 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-top: 20px;
+    display: inline-block;
+    color: #fff;
+}
+.banner-text a:hover{
+    background-color: white;
+    color: rgba(68, 25, 109, 0.623);
+    font-weight: bold;
+}
+
+.custom-nav-style {
+    background-color: rgba(255, 255, 255, 0.15); /* Use rgba for transparency */
+
+}
+
+
+.footer {
+    background-color: rgb(31, 47, 64);
+    color: #fff;
+    padding: 20px;
+    text-align: left;
+    position: relative;
+    margin-bottom: 0px;
+}
+
+.footer h2 {
+    margin-bottom: 10px;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

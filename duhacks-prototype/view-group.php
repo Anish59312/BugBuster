@@ -8,7 +8,7 @@
     $result = mysqli_query($link, $getGroupsId);
     
     if(mysqli_num_rows($result) == 0){
-        die("join a group first");
+        echo("join a group first");
     }
 
     $getGroupName = "SELECT `group_name` FROM `groups` WHERE `group_id` = ? ";

@@ -134,32 +134,33 @@ if ($_SESSION["loggedin"] == "true") {
     </style>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="home.php">SPLITWISE</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="home1.php">SPLITEASE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home1.php">Home</a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="group.php">Group</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Create</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Transactions</a>
-          </li>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="create-transaction.php">Create</a>
+            </li>
         </ul>
-      </div>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">login</a>
+            </li>
+        </ul>
+        </div>
     </div>
-  </nav>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width:100%;">
+    </nav>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width:100%;">
   Click Here to Create a Group
 </button>
 
