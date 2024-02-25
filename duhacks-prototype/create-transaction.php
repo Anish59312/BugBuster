@@ -1,6 +1,12 @@
 <?php
     include("config.php");
     session_start();
+
+
+    if($_SESSION["loggedin"] == false)
+    {
+        header("Location: login.php?message=".urlencode("login first"));
+    }
     //add logged in constraint
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['createTransactionForm'])){
         $groupName = trim($_POST["groupname"]);

@@ -1,0 +1,15 @@
+/* Apply styles to the list items */
+.group-item {
+    background-color: #f0f0f0; /* Light gray background */
+    padding: 10px; /* Add padding to create space around the content */
+    margin: 5px 0; /* Add margin to separate each item */
+    border: 1px solid #ccc; /* Add a border around each item */
+    border-radius: 5px; /* Add rounded corners */
+    list-style-type: none; /* Remove default list styles */
+}
+
+/* Style for the entire list container if needed */
+.group-list {
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
